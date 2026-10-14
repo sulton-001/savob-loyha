@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Savob yo'li — Shaffof va ishonchli xayriya platformasi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2f8442;
+      --primary-hover: #266d36;
+      --primary-light: #e8f5ec;
+      --dark-green: #173b2a;
+      --bg-page: #f0f0e9;
+      --bg-card: #ffffff;
+      --teal-accent: #2e6e6a;
+      --teal-light: #e3f2f1;
+      --text-main: #173b2a;
+      --text-muted: #526359;
+      --border-color: #d6ded8;
+      --danger: #d9383a;
+      --danger-light: #fde8e8;
+      --warning: #e68a00;
+      --warning-light: #fef5e7;
+      --shadow-sm: 0 2px 8px rgba(23, 59, 42, 0.06);
+      --shadow-md: 0 8px 24px rgba(23, 59, 42, 0.08);
+      --shadow-lg: 0 16px 40px rgba(23, 59, 42, 0.12);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 18px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Onest', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.55;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    /* Klaviatura fokusi */
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--teal-accent);
+      outline-offset: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ---------------- Navbar ---------------- */
+    header.navbar {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 74px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--primary), var(--teal-accent));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(47, 132, 66, 0.3);
+    }
+
+    .brand-text h1 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark-green);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-text p {
+      font-size: 12px;
+      color: var(--teal-accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .badge-demo {
+      background: var(--warning-light);
+      color: var(--warning);
+      border: 1px solid #ffd8a8;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      box-shadow: 0 4px 14px rgba(47, 132, 66, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .btn-teal {
+      background-color: var(--teal-accent);
+      color: #fff;
+    }
+    .btn-teal:hover {
+      background-color: #245855;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary-light);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+    }
+    .btn-ghost:hover {
+      background: rgba(0,0,0,0.04);
+      color: var(--text-main);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: #fff;
+    }
+    .btn-danger:hover {
+      background: #b52a2c;
+    }
+
+    /* ---------------- Hero Section ---------------- */
+    .hero-section {
+      padding: 56px 0 36px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 20%, rgba(47, 132, 66, 0.08) 0%, transparent 70%);
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      border: 1px solid rgba(47, 132, 66, 0.2);
+    }
+
+    .hero-title {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--dark-green);
+      max-width: 860px;
+      margin: 0 auto 18px;
+      letter-spacing: -0.8px;
+    }
+
+    .hero-title span {
+      color: var(--primary);
+      position: relative;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ---------------- Stats Section ---------------- */
+    .stats-section {
+      padding: 20px 0 44px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: var(--transition);
+    }
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .stat-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+    .stat-icon.green { background: var(--primary-light); color: var(--primary); }
+    .stat-icon.teal { background: var(--teal-light); color: var(--teal-accent); }
+    .stat-icon.orange { background: var(--warning-light); color: var(--warning); }
+
+    .stat-info h3 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--dark-green);
+      letter-spacing: -0.5px;
+    }
+
+    .stat-info p {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* ---------------- Workflow Section ---------------- */
+    .workflow-section {
+      padding: 30px 0 50px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .section-header h2 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--dark-green);
+      letter-spacing: -0.4px;
+      margin-bottom: 8px;
+    }
+
+    .section-header p {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .flow-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 22px 18px;
+      position: relative;
+    }
+
+    .flow-num {
+      width: 32px;
+      height: 32px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 50%;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .flow-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--dark-green);
+      margin-bottom: 6px;
+    }
+
+    .flow-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ---------------- Catalog & Filter ---------------- */
+    .catalog-section {
+      padding: 20px 0 80px;
+    }
+
+    .filter-bar {
+      background: var(--bg-card);
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-sm);
+      flex-wrap: wrap;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-btn:hover {
+      background: var(--bg-page);
+      color: var(--text-main);
+    }
+    .filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 6px 14px;
+      width: 260px;
+    }
+
+    .search-box input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 13px;
+      width: 100%;
+      color: var(--text-main);
+    }
+
+    /* ---------------- Application Cards ---------------- */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 24px;
+    }
+
+    .app-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+    .app-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: #bad3c2;
+    }
+
+    .card-top {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid #f0f4f1;
+    }
+
+    .card-category {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--teal-light);
+      color: var(--teal-accent);
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark-green);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .card-mahalla {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .card-body {
+      padding: 18px 24px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Approvals Badges */
+    .approvals-section h5 {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--teal-accent);
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: 0.4px;
+    }
+
+    .approval-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .badge-org {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* Progress bar */
+    .progress-box {
+      margin-top: auto;
+    }
+
+    .progress-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .progress-stats .collected {
+      color: var(--primary);
+      font-size: 15px;
+    }
+
+    .progress-stats .target {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 10px;
+      background: #e4ebe6;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--teal-accent));
+      border-radius: 10px;
+      transition: width 0.6s ease;
+    }
+
+    .progress-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    .card-actions {
+      padding: 16px 24px 20px;
+      background: #fafbfa;
+      border-top: 1px solid #f0f4f1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* ---------------- Modals ---------------- */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(23, 59, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-window {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 640px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      animation: modalFadeIn 0.25s ease-out;
+    }
+
+    .modal-window.large {
+      max-width: 900px;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-header {
+      padding: 20px 26px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark-green);
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .btn-close:hover {
+      background: #f0f0f0;
+      color: #000;
+    }
+
+    .modal-content {
+      padding: 24px 26px;
+      overflow-y: auto;
+      flex-grow: 1;
+    }
+
+    .modal-footer {
+      padding: 16px 26px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      background: #fafbfa;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+
+    /* Forms */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark-green);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      color: var(--text-main);
+      background: #fff;
+      transition: var(--transition);
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(47, 132, 66, 0.15);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .quick-amounts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .quick-amt-btn {
+      padding: 9px;
+      background: var(--bg-page);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .quick-amt-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+    .quick-amt-btn.selected {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Transparent Donations Ledger */
+    .donations-ledger {
+      margin-top: 20px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+
+    .ledger-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+
+    .ledger-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: #f8faf8;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      border: 1px solid #e7efe9;
+    }
+
+    .ledger-donor {
+      font-weight: 700;
+      color: var(--dark-green);
+    }
+    .ledger-time {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .ledger-amount {
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    /* Dashboard UI */
+    .dashboard-tabs {
+      display: flex;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 20px;
+      gap: 20px;
+    }
+
+    .dash-tab-btn {
+      padding: 10px 4px;
+      background: transparent;
+      border: none;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+    }
+    .dash-tab-btn.active {
+      color: var(--primary);
+    }
+    .dash-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 3px;
+    }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    table.data-table th {
+      background: #f4f7f5;
+      padding: 12px 14px;
+      font-weight: 700;
+      color: var(--dark-green);
+      border-bottom: 1.5px solid var(--border-color);
+    }
+
+    table.data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #eef2ef;
+      color: var(--text-main);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .status-approved { background: var(--primary-light); color: var(--primary); }
+    .status-pending { background: var(--warning-light); color: var(--warning); }
+    .status-rejected { background: var(--danger-light); color: var(--danger); }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--dark-green);
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 300;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      max-width: 400px;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      background: #fff;
+      border-top: 1px solid var(--border-color);
+      padding: 30px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 30px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .flow-steps { grid-template-columns: 1fr; }
+      .apps-grid { grid-template-columns: 1fr; }
+      .card-actions { grid-template-columns: 1fr; }
+      .nav-inner { height: auto; padding: 14px 0; flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ---------------- Navbar ---------------- -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <div class="brand-icon">☪</div>
+        <div class="brand-text">
+          <h1>Savob yo'li</h1>
+          <p>Shaffof xayriya platformasi</p>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <span class="badge-demo">Demo rejim</span>
+        <div id="userNavSection">
+          <!-- Dinamik tarzda to'ldiriladi: Kirish yoki Profil -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ---------------- Hero Section ---------------- -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-pill">✓ Davlat idoralari va Mahalla kafolatida</div>
+      <h2 class="hero-title">
+        Har bir tiyin ochiq va shaffof: <span>Vositachisiz</span>, to'g'ridan-to'g'ri ko'mak
+      </h2>
+      <p class="hero-subtitle">
+        Mahalla ehtiyojmand fuqaro nomidan ariza beradi. Davlat idoralari (Ijtimoiy himoya, Soliq) mustaqil tekshirib tasdiqlagach, xayriyalar vositachilarsiz 100% to'g'ridan-to'g'ri yetkaziladi.
+      </p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" onclick="scrollToApps()">Arizalarni ko'rish va xayriya qilish</button>
+        <button class="btn btn-outline" onclick="openLoginModal()">Mansabdorlar kirishi (Mahalla / Idora)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------- 3 ta Jonli Statistika ---------------- -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon green">💰</div>
+          <div class="stat-info">
+            <h3 id="statTotalDonated">0 so'm</h3>
+            <p>Jami to'plangan xayriya</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon teal">👨‍👩‍👧‍👦</div>
+          <div class="stat-info">
+            <h3 id="statFamilies">0 ta</h3>
+            <p>Ko'mak olgan oilalar</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange">🛡️</div>
+          <div class="stat-info">
+            <h3 id="statApps">0 ta</h3>
+            <p>Tasdiqlangan arizalar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------- Platforma Qanday Ishlaydi? ---------------- -->
+  <section class="workflow-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Shaffoflik qanday ta'minlanadi?</h2>
+        <p>Firibgarlik va vositachilar ulushiga to'liq chek qo'yuvchi 4 bosqichli tizim</p>
+      </div>
+      <div class="flow-steps">
+        <div class="flow-card">
+          <div class="flow-num">1</div>
+          <h4>Mahalla arizasi</h4>
+          <p>Mahalla fuqarolar yig'ini (MFY) ehtiyojmand oilani o'rganib, uning nomidan rasmiy ariza kiritadi.</p>
+        </div>
+        <div class="flow-card">
+          <div class="flow-num">2</div>
+          <h4>Ko'p bosqichli tekshiruv</h4>
+          <p>Kamida 2 ta mustaqil davlat idorasi (Ijtimoiy himoya, Soliq) moliyaviy va tibbiy holatni tekshirib tasdiqlaydi.</p>
+        </div>
+        <div class="flow-card">
+          <div class="flow-num">3</div>
+          <h4>Ommaviy e'lon</h4>
+          <p>Faqat tekshiruvdan o'tgan arizalar saytda chiqadi. Har bir tasdiqlovchi idora ochiq ko'rsatiladi.</p>
+        </div>
+        <div class="flow-card">
+          <div class="flow-num">4</div>
+          <h4>Vositachisiz yordam</h4>
+          <p>Donorlar ro'yxatdan o'tmasdan to'g'ridan-to'g'ri yuboradi. Har bir so'm shaffof daftarda aks etadi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------- Arizalar Katalogi (Ommaviy sahifa) ---------------- -->
+  <section class="catalog-section" id="catalogSection">
+    <div class="container">
+      <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+        <h2>Tasdiqlangan arizalar</h2>
+        <p>Davlat idoralari tomonidan tekshirilib, yordamga muhtojligi tasdiqlangan holatlar</p>
+      </div>
+
+      <!-- Filter va Qidiruv -->
+      <div class="filter-bar">
+        <div class="filter-tabs" id="categoryFilter">
+          <button class="filter-btn active" onclick="setCategoryFilter('all')">Barchasi</button>
+          <button class="filter-btn" onclick="setCategoryFilter('Davolanish')">Davolanish</button>
+          <button class="filter-btn" onclick="setCategoryFilter('Reabilitatsiya')">Reabilitatsiya</button>
+          <button class="filter-btn" onclick="setCategoryFilter('Operatsiya')">Operatsiya</button>
+        </div>
+        <div class="search-box">
+          <span style="margin-right: 6px;">🔍</span>
+          <input type="text" id="searchInput" placeholder="Ariza yoki fuqaroni qidirish..." oninput="handleSearch()">
+        </div>
+      </div>
+
+      <!-- Arizalar ro'yxati -->
+      <div class="apps-grid" id="appsGrid">
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
+          Yuklanmoqda...
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------- Modal: Ariza Batafsil & Shaffof Daftar ---------------- -->
+  <div class="modal-backdrop" id="detailModal">
+    <div class="modal-window large">
+      <div class="modal-header">
+        <h3 id="detailTitle">Ariza ma'lumotlari</h3>
+        <button class="btn-close" onclick="closeModal('detailModal')">&times;</button>
+      </div>
+      <div class="modal-content" id="detailContent">
+        <!-- JS orqali to'ldiriladi -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('detailModal')">Yopish</button>
+        <button class="btn btn-primary" id="detailDonateBtn">Ushbu arizaga xayriya qilish</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- Modal: Xayriya Qilish ---------------- -->
+  <div class="modal-backdrop" id="donateModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>Savobli xayriya qilish</h3>
+        <button class="btn-close" onclick="closeModal('donateModal')">&times;</button>
+      </div>
+      <div class="modal-content">
+        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 18px;" id="donateAppSubtitle"></p>
+
+        <form id="donateForm" onsubmit="submitDonation(event)">
+          <div class="form-group">
+            <label>Xayriya summasi (so'm)</label>
+            <input type="number" id="donateAmount" class="form-control" min="1000" step="1000" placeholder="Minimal 1 000 so'm" required>
+            <div class="quick-amounts">
+              <button type="button" class="quick-amt-btn" onclick="selectQuickAmount(10000)">10 000</button>
+              <button type="button" class="quick-amt-btn" onclick="selectQuickAmount(50000)">50 000</button>
+              <button type="button" class="quick-amt-btn" onclick="selectQuickAmount(100000)">100 000</button>
+              <button type="button" class="quick-amt-btn" onclick="selectQuickAmount(500000)">500 000</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Ismingiz</label>
+            <input type="text" id="donateDonorName" class="form-control" placeholder="Ismingizni kiriting">
+            <label style="display: flex; align-items: center; gap: 8px; margin-top: 8px; font-weight: normal; cursor: pointer;">
+              <input type="checkbox" id="donateAnonymous" onchange="toggleAnonymous()">
+              <span>Anonim qolishni istayman (ism ko'rsatilmaydi)</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label>Ezgu tilak yoki izoh (ixtiyoriy)</label>
+            <input type="text" id="donateComment" class="form-control" placeholder="Masalan: Tezroq shifo topsin!">
+          </div>
+
+          <div style="background: var(--primary-light); padding: 12px; border-radius: 8px; font-size: 12px; color: var(--dark-green); margin-bottom: 12px;">
+            🛡️ <strong>Shaffoflik kafolati:</strong> Mablag'ingiz vositachilarsiz qabul qilinadi va darhol shaffof xayriyalar ro'yxatida ko'rinadi.
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn btn-ghost" onclick="closeModal('donateModal')">Bekor qilish</button>
+            <button type="submit" class="btn btn-primary" id="donateSubmitBtn">Xayriyani tasdiqlash</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- Modal: Tizimga Kirish (Login) ---------------- -->
+  <div class="modal-backdrop" id="loginModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>Mansabdorlar kirishi</h3>
+        <button class="btn-close" onclick="closeModal('loginModal')">&times;</button>
+      </div>
+      <div class="modal-content">
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Mahalla xodimlari, tekshiruvchi davlat idoralari va ma'muriyat uchun xizmat maydoni.
+        </p>
+
+        <!-- Demo tezkor to'ldirish tugmalari -->
+        <div style="background: #fdfaf0; border: 1px dashed var(--warning); padding: 12px; border-radius: 8px; margin-bottom: 16px;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--warning); text-transform: uppercase; margin-bottom: 6px;">
+            ⚡ Demo hisoblar (1 bosishda to'ldirish):
+          </div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-ghost" style="font-size: 11px; padding: 4px 8px; background: #fff;" onclick="quickFillLogin('admin', 'admin12345')">Admin</button>
+            <button type="button" class="btn btn-ghost" style="font-size: 11px; padding: 4px 8px; background: #fff;" onclick="quickFillLogin('mahalla_chilonzor', 'demo12345')">Mahalla</button>
+            <button type="button" class="btn btn-ghost" style="font-size: 11px; padding: 4px 8px; background: #fff;" onclick="quickFillLogin('rev_ijtimoiy', 'demo12345')">Ijtimoiy himoya</button>
+            <button type="button" class="btn btn-ghost" style="font-size: 11px; padding: 4px 8px; background: #fff;" onclick="quickFillLogin('rev_soliq', 'demo12345')">Soliq qo'mitasi</button>
+          </div>
+        </div>
+
+        <form id="loginForm" onsubmit="submitLogin(event)">
+          <div class="form-group">
+            <label>Foydalanuvchi nomi (Login)</label>
+            <input type="text" id="loginUsername" class="form-control" required placeholder="Loginni kiriting">
+          </div>
+          <div class="form-group">
+            <label>Parol</label>
+            <input type="password" id="loginPassword" class="form-control" required placeholder="Parolni kiriting">
+          </div>
+          <div style="display: flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn btn-ghost" onclick="closeModal('loginModal')">Bekor qilish</button>
+            <button type="submit" class="btn btn-primary">Kirish</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- Modal: Shaxsiy Kabinet / Boshqaruv Paneli ---------------- -->
+  <div class="modal-backdrop" id="dashboardModal">
+    <div class="modal-window large">
+      <div class="modal-header">
+        <div>
+          <h3 id="dashUserFullName">Boshqaruv paneli</h3>
+          <p id="dashUserOrg" style="font-size: 12px; color: var(--teal-accent); font-weight: 600;"></p>
+        </div>
+        <button class="btn-close" onclick="closeModal('dashboardModal')">&times;</button>
+      </div>
+      <div class="modal-content" id="dashboardContent">
+        <!-- Rol bo'yicha dinamik yuklanadi -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- Toast Bildirishnoma ---------------- -->
+  <div id="toast"></div>
+
+  <!-- ---------------- Footer ---------------- -->
+  <footer>
+    <div class="container">
+      <p style="font-weight: 700; color: var(--dark-green); margin-bottom: 4px;">"Savob yo'li" Ochiq Xayriya Tizimi — 2026</p>
+      <p>Shaffoflik, xalq ishonchi va muhtojlarga to'g'ridan-to'g'ri ko'mak platformasi</p>
+    </div>
+  </footer>
+
+  <!-- ---------------- JavaScript Logic ---------------- -->
+  <script>
+    const API_BASE = "";
+    let currentUser = JSON.parse(localStorage.getItem("savob_user") || "null");
+    let currentToken = localStorage.getItem("savob_token") || null;
+
+    let allApplications = [];
+    let currentCategory = "all";
+    let activeDonationAppId = null;
+
+    // Sahifa yuklanganda ishga tushadigan boshlang'ich funksiyalar
+    document.addEventListener("DOMContentLoaded", () => {
+      updateNavUser();
+      loadStats();
+      loadApplications();
+    });
+
+    // XSS himoyasi uchun xavfsiz escape qilish
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function formatMoney(amount) {
+      return Number(amount || 0).toLocaleString("uz-UZ") + " so'm";
+    }
+
+    function showToast(message, isError = false) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.style.background = isError ? "var(--danger)" : "var(--dark-green)";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3500);
+    }
+
+    function scrollToApps() {
+      document.getElementById("catalogSection").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add("active");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("active");
+    }
+
+    // ---------------- Navbarda foydalanuvchi holati ----------------
+    function updateNavUser() {
+      const navSection = document.getElementById("userNavSection");
+      if (currentUser && currentToken) {
+        let roleBadge = "";
+        if (currentUser.role === "admin") roleBadge = "Admin";
+        else if (currentUser.role === "mahalla") roleBadge = "Mahalla";
+        else if (currentUser.role === "reviewer") roleBadge = "Tekshiruvchi idora";
+
+        navSection.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <button class="btn btn-teal" onclick="openDashboard()">
+              👤 ${escapeHtml(currentUser.full_name)} (${roleBadge})
+            </button>
+            <button class="btn btn-ghost" onclick="logout()" title="Tizimdan chiqish">Chiqish</button>
+          </div>
+        `;
+      } else {
+        navSection.innerHTML = `
+          <button class="btn btn-outline" onclick="openLoginModal()">Kirish</button>
+        `;
+      }
+    }
+
+    // ---------------- Statistika ----------------
+    async function loadStats() {
+      try {
+        const res = await fetch(`${API_BASE}/api/stats`);
+        if (!res.ok) return;
+        const data = await res.json();
+        document.getElementById("statTotalDonated").textContent = formatMoney(data.total_donated);
+        document.getElementById("statFamilies").textContent = `${data.helped_families} ta`;
+        document.getElementById("statApps").textContent = `${data.approved_applications} ta`;
+      } catch (e) {
+        console.error("Statistika yuklanmadi", e);
+      }
+    }
+
+    // ---------------- Arizalar ro'yxati ----------------
+    async function loadApplications() {
+      const grid = document.getElementById("appsGrid");
+      try {
+        const res = await fetch(`${API_BASE}/api/applications`);
+        if (!res.ok) throw new Error("Arizalarni yuklab bo'lmadi");
+        allApplications = await res.json();
+        renderApplications();
+      } catch (e) {
+        grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: var(--danger); padding: 30px;">Xatolik: ${escapeHtml(e.message)}</div>`;
+      }
+    }
+
+    function setCategoryFilter(category) {
+      currentCategory = category;
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.textContent.toLowerCase() === category.toLowerCase() || (category === "all" && btn.textContent === "Barchasi"));
+      });
+      renderApplications();
+    }
+
+    function handleSearch() {
+      renderApplications();
+    }
+
+    function renderApplications() {
+      const grid = document.getElementById("appsGrid");
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+
+      const filtered = allApplications.filter(app => {
+        const matchCategory = currentCategory === "all" || app.category.toLowerCase() === currentCategory.toLowerCase();
+        const matchSearch = !query ||
+          app.title.toLowerCase().includes(query) ||
+          app.citizen_name.toLowerCase().includes(query) ||
+          app.description.toLowerCase().includes(query) ||
+          (app.mahalla_org && app.mahalla_org.toLowerCase().includes(query));
+        return matchCategory && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: #fff; border-radius: var(--radius); border: 1px dashed var(--border-color);">
+            <p style="font-size: 16px; color: var(--text-muted);">Hech qanday tasdiqlangan ariza topilmadi.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(app => {
+        const percent = Math.min(100, Math.round((app.collected_amount / app.target_amount) * 100));
+        const approvalsList = (app.approved_by || []).map(org => `
+          <span class="badge-org">✓ ${escapeHtml(org)}</span>
+        `).join("");
+
+        return `
+          <div class="app-card">
+            <div class="card-top">
+              <span class="card-category">${escapeHtml(app.category)}</span>
+              <h3 class="card-title">${escapeHtml(app.title)}</h3>
+              <div class="card-mahalla">
+                <span>🏛️ Mahalla kafili:</span> <strong>${escapeHtml(app.mahalla_org)}</strong>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <p class="card-desc">${escapeHtml(app.description)}</p>
+
+              <div class="approvals-section">
+                <h5>Tekshirib tasdiqlagan idoralar:</h5>
+                <div class="approval-badges">
+                  ${approvalsList || '<span style="font-size: 11px; color: var(--text-muted);">Tekshiruv ma\'lumoti</span>'}
+                </div>
+              </div>
+
+              <div class="progress-box">
+                <div class="progress-stats">
+                  <span class="collected">${formatMoney(app.collected_amount)}</span>
+                  <span class="target">Kerak: ${formatMoney(app.target_amount)}</span>
+                </div>
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill" style="width: ${percent}%;"></div>
+                </div>
+                <div class="progress-footer">
+                  <span>${percent}% yig'ildi</span>
+                  <span>${app.donor_count || 0} ta xayriya</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-actions">
+              <button class="btn btn-outline" onclick="openAppDetail(${app.id})">Batafsil</button>
+              <button class="btn btn-primary" onclick="openDonateModal(${app.id}, '${escapeHtml(app.title)}')">Xayriya qilish</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // ---------------- Ariza Batafsil Modali ----------------
+    async function openAppDetail(appId) {
+      const content = document.getElementById("detailContent");
+      content.innerHTML = "<p>Yuklanmoqda...</p>";
+      openModal("detailModal");
+
+      try {
+        const res = await fetch(`${API_BASE}/api/applications/${appId}`);
+        if (!res.ok) throw new Error("Ariza tafsilotlari topilmadi");
+        const app = await res.json();
+
+        document.getElementById("detailTitle").textContent = app.title;
+        document.getElementById("detailDonateBtn").onclick = () => {
+          closeModal("detailModal");
+          openDonateModal(app.id, app.title);
+        };
+
+        const percent = Math.min(100, Math.round((app.collected_amount / app.target_amount) * 100));
+
+        const approvalsHtml = (app.approvals || []).map(a => `
+          <div style="background: var(--primary-light); padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid var(--primary);">
+            <div style="font-weight: 700; color: var(--dark-green); font-size: 13px;">✓ ${escapeHtml(a.org)}</div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">"${escapeHtml(a.comment)}"</div>
+          </div>
+        `).join("");
+
+        const donationsHtml = (app.donations && app.donations.length > 0)
+          ? app.donations.map(d => `
+              <div class="ledger-item">
+                <div>
+                  <div class="ledger-donor">${escapeHtml(d.donor_name)}</div>
+                  <div class="ledger-time">${new Date(d.created_at).toLocaleString("uz-UZ")} ${d.comment ? `— "${escapeHtml(d.comment)}"` : ''}</div>
+                </div>
+                <div class="ledger-amount">+ ${formatMoney(d.amount)}</div>
+              </div>
+            `).join("")
+          : '<p style="font-size: 12px; color: var(--text-muted); padding: 10px 0;">Hozircha xayriyalar tushmagan. Birinchi bo\'lib ko\'mak bering!</p>';
+
+        content.innerHTML = `
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+              <span class="card-category">${escapeHtml(app.category)}</span>
+              <span style="font-size: 12px; color: var(--text-muted);">Fuqaro: <strong>${escapeHtml(app.citizen_name)}</strong></span>
+            </div>
+            <p style="font-size: 14px; color: var(--text-main); line-height: 1.6; margin-bottom: 12px;">${escapeHtml(app.description)}</p>
+            <div style="font-size: 12px; color: var(--text-muted);">📍 Manzil: ${escapeHtml(app.address)}</div>
+            <div style="font-size: 12px; color: var(--text-muted);">🏛️ Kafillik beruvchi MFY: <strong>${escapeHtml(app.mahalla_org)}</strong></div>
+          </div>
+
+          <div style="background: #fafbfa; padding: 14px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 18px;">
+            <div class="progress-stats">
+              <span class="collected">${formatMoney(app.collected_amount)}</span>
+              <span class="target">Reja: ${formatMoney(app.target_amount)} (${percent}%)</span>
+            </div>
+            <div class="progress-bar-bg" style="margin-top: 6px;">
+              <div class="progress-bar-fill" style="width: ${percent}%;"></div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 18px;">
+            <h4 style="font-size: 14px; font-weight: 700; color: var(--dark-green); margin-bottom: 10px;">
+              🛡️ Rasmiy davlat idoralari xulosalari:
+            </h4>
+            ${approvalsHtml || '<p style="font-size: 12px; color: var(--text-muted);">Xulosalar mavjud emas</p>'}
+          </div>
+
+          <div class="donations-ledger">
+            <h4 style="font-size: 14px; font-weight: 700; color: var(--dark-green);">
+              📖 Shaffof xayriyalar daftari (Har bir to'lov):
+            </h4>
+            <div class="ledger-list">
+              ${donationsHtml}
+            </div>
+          </div>
+        `;
+      } catch (e) {
+        content.innerHTML = `<p style="color: var(--danger);">Xatolik: ${escapeHtml(e.message)}</p>`;
+      }
+    }
+
+    // ---------------- Xayriya Qilish ----------------
+    function openDonateModal(appId, title) {
+      activeDonationAppId = appId;
+      document.getElementById("donateAppSubtitle").textContent = `Ariza: ${title}`;
+      document.getElementById("donateAmount").value = "";
+      document.getElementById("donateComment").value = "";
+      document.querySelectorAll(".quick-amt-btn").forEach(btn => btn.classList.remove("selected"));
+      openModal("donateModal");
+    }
+
+    function selectQuickAmount(amount) {
+      document.getElementById("donateAmount").value = amount;
+      document.querySelectorAll(".quick-amt-btn").forEach(btn => {
+        btn.classList.toggle("selected", btn.textContent.replace(/\s+/g, '') === amount.toString());
+      });
+    }
+
+    function toggleAnonymous() {
+      const isAnon = document.getElementById("donateAnonymous").checked;
+      const donorInput = document.getElementById("donateDonorName");
+      if (isAnon) {
+        donorInput.value = "Anonim";
+        donorInput.disabled = true;
+      } else {
+        donorInput.value = "";
+        donorInput.disabled = false;
+      }
+    }
+
+    async function submitDonation(e) {
+      e.preventDefault();
+      const amount = parseInt(document.getElementById("donateAmount").value, 10);
+      const isAnon = document.getElementById("donateAnonymous").checked;
+      const donorName = isAnon ? "Anonim" : (document.getElementById("donateDonorName").value.trim() || "Anonim");
+      const comment = document.getElementById("donateComment").value.trim();
+
+      if (amount < 1000) {
+        showToast("Minimal xayriya summasi 1 000 so'm", true);
+        return;
+      }
+
+      const submitBtn = document.getElementById("donateSubmitBtn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Amalga oshirilmoqda...";
+
+      try {
+        const res = await fetch(`${API_BASE}/api/applications/${activeDonationAppId}/donate`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount: amount,
+            donor_name: donorName,
+            comment: comment
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "To'lovda xatolik");
+
+        closeModal("donateModal");
+        showToast(data.message || "Xayriyangiz uchun tashakkur!");
+        loadStats();
+        loadApplications();
+      } catch (err) {
+        showToast(err.message, true);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Xayriyani tasdiqlash";
+      }
+    }
+
+    // ---------------- Login & Auth ----------------
+    function openLoginModal() {
+      openModal("loginModal");
+    }
+
+    function quickFillLogin(u, p) {
+      document.getElementById("loginUsername").value = u;
+      document.getElementById("loginPassword").value = p;
+    }
+
+    async function submitLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById("loginUsername").value.trim();
+      const p = document.getElementById("loginPassword").value.trim();
+
+      try {
+        const res = await fetch(`${API_BASE}/api/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: u, password: p })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Kirishda xatolik");
+
+        currentUser = data.user;
+        currentToken = data.access_token;
+        localStorage.setItem("savob_user", JSON.stringify(currentUser));
+        localStorage.setItem("savob_token", currentToken);
+
+        closeModal("loginModal");
+        updateNavUser();
+        showToast(`Xush kelibsiz, ${currentUser.full_name}!`);
+        openDashboard();
+      } catch (err) {
+        showToast(err.message, true);
+      }
+    }
+
+    function logout() {
+      currentUser = null;
+      currentToken = null;
+      localStorage.removeItem("savob_user");
+      localStorage.removeItem("savob_token");
+      updateNavUser();
+      closeModal("dashboardModal");
+      showToast("Tizimdan chiqildi.");
+    }
+
+    // ---------------- Dashboard ----------------
+    function openDashboard() {
+      if (!currentUser) return openLoginModal();
+
+      document.getElementById("dashUserFullName").textContent = currentUser.full_name;
+      document.getElementById("dashUserOrg").textContent = `${currentUser.org} (${currentUser.role.toUpperCase()})`;
+
+      const content = document.getElementById("dashboardContent");
+
+      if (currentUser.role === "admin") {
+        renderAdminDashboard(content);
+      } else if (currentUser.role === "mahalla") {
+        renderMahallaDashboard(content);
+      } else if (currentUser.role === "reviewer") {
+        renderReviewerDashboard(content);
+      }
+
+      openModal("dashboardModal");
+    }
+
+    // Admin Dashboard
+    async function renderAdminDashboard(container) {
+      container.innerHTML = `
+        <div class="dashboard-tabs">
+          <button class="dash-tab-btn active" id="tabAdminUsers">Foydalanuvchilar boshqaruvi</button>
+        </div>
+
+        <div style="background: var(--bg-page); padding: 18px; border-radius: var(--radius); margin-bottom: 24px; border: 1px solid var(--border-color);">
+          <h4 style="margin-bottom: 12px; color: var(--dark-green);">➕ Yangi hisob yaratish (Mahalla yoki Tekshiruvchi idora)</h4>
+          <form id="adminCreateUserForm" onsubmit="submitAdminCreateUser(event)">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+              <div>
+                <label style="font-size: 12px; font-weight: 700;">Login</label>
+                <input type="text" id="newUsername" class="form-control" required placeholder="masalan: mahalla_yunusobod">
+              </div>
+              <div>
+                <label style="font-size: 12px; font-weight: 700;">Parol (kamida 6 belgi)</label>
+                <input type="password" id="newPassword" class="form-control" required minlength="6" placeholder="Parol">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+              <div>
+                <label style="font-size: 12px; font-weight: 700;">Rol</label>
+                <select id="newRole" class="form-control" required>
+                  <option value="mahalla">Mahalla (MFY)</option>
+                  <option value="reviewer">Tekshiruvchi davlat idorasi</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 12px; font-weight: 700;">Tashkilot nomi</label>
+                <input type="text" id="newOrg" class="form-control" required placeholder="Masalan: Yunusobod 3-mavze MFY">
+              </div>
+            </div>
+
+            <div style="margin-bottom: 14px;">
+              <label style="font-size: 12px; font-weight: 700;">Mas'ul shaxs F.I.Sh</label>
+              <input type="text" id="newFullName" class="form-control" required placeholder="Masalan: Abdullayev Tohir">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Hisobni yaratish</button>
+          </form>
+        </div>
+
+        <h4 style="margin-bottom: 10px; color: var(--dark-green);">📋 Tizimdagi mavjud hisoblar</h4>
+        <div class="table-container" id="adminUsersTableBox">
+          <p>Foydalanuvchilar ro'yxati yuklanmoqda...</p>
+        </div>
+      `;
+      loadAdminUsersList();
+    }
+
+    async function loadAdminUsersList() {
+      const box = document.getElementById("adminUsersTableBox");
+      try {
+        const res = await fetch(`${API_BASE}/api/admin/users`, {
+          headers: { "Authorization": `Bearer ${currentToken}` }
+        });
+        const users = await res.json();
+        if (!res.ok) throw new Error(users.detail);
+
+        box.innerHTML = `
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Login</th>
+                <th>Rol</th>
+                <th>Tashkilot</th>
+                <th>F.I.Sh</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${users.map(u => `
+                <tr>
+                  <td>#${u.id}</td>
+                  <td><strong>${escapeHtml(u.username)}</strong></td>
+                  <td><span class="status-badge status-approved">${escapeHtml(u.role)}</span></td>
+                  <td>${escapeHtml(u.org)}</td>
+                  <td>${escapeHtml(u.full_name)}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+      } catch (e) {
+        box.innerHTML = `<p style="color: var(--danger);">Xatolik: ${escapeHtml(e.message)}</p>`;
+      }
+    }
+
+    async function submitAdminCreateUser(e) {
+      e.preventDefault();
+      try {
+        const res = await fetch(`${API_BASE}/api/admin/users`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${currentToken}`
+          },
+          body: JSON.stringify({
+            username: document.getElementById("newUsername").value.trim(),
+            password: document.getElementById("newPassword").value.trim(),
+            role: document.getElementById("newRole").value,
+            org: document.getElementById("newOrg").value.trim(),
+            full_name: document.getElementById("newFullName").value.trim()
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail);
+
+        showToast("Yangi foydalanuvchi muvaffaqiyatli yaratildi!");
+        loadAdminUsersList();
+        document.getElementById("adminCreateUserForm").reset();
+      } catch (err) {
+        showToast(err.message, true);
+      }
+    }
+
+    // Mahalla Dashboard
+    async function renderMahallaDashboard(container) {
+      container.innerHTML = `
+        <div style="background: var(--bg-page); padding: 18px; border-radius: var(--radius); margin-bottom: 24px; border: 1px solid var(--border-color);">
+          <h4 style="margin-bottom: 12px; color: var(--dark-green);">📝 Yangi ariza yuborish (Ehtiyojmand fuqaro nomidan)</h4>
+          <form id="mahallaNewAppForm" onsubmit="submitMahallaApp(event)">
+            <div style="margin-bottom: 12px;">
+              <label style="font-size: 12px; font-weight: 700;">Ariza sarlavhasi</label>
+              <input type="text" id="appTitle" class="form-control" required placeholder="Masalan: Shoshilinch operatsiya uchun moddiy ko'mak">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+              <div>
+                <label style="font-size: 12px; font-weight: 700;">Fuqaro F.I.Sh</label>
+                <input type="text" id="appCitizen" class="form-control" required placeholder="Fuqaro ismi">
+              </div>
+              <div>
+                <label style="font-size: 12px; font-weight: 700;">JShShIR (PINFL - 14 ta raqam)</label>
+                <input type="text" id="appPinfl" class="form-control" required minlength="14" maxlength="14" placeholder="51234567890123">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+              <div>
+                <label style="font-size: 12px; font-weight: 700;">Toifa</label>
+                <select id="appCategory" class="form-control" required>
+                  <option value="Davolanish">Davolanish</option>
+                  <option value="Operatsiya">Operatsiya</option>
+                  <option value="Reabilitatsiya">Reabilitatsiya</option>
+                  <option value="Uy-joy">Uy-joy ta'miri</option>
+                  <option value="Ta'lim">Ta'lim</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 12px; font-weight: 700;">Kerakli summa (so'm)</label>
+                <input type="number" id="appTarget" class="form-control" required min="100000" step="50000" placeholder="10 000 000">
+              </div>
+            </div>
+
+            <div style="margin-bottom: 12px;">
+              <label style="font-size: 12px; font-weight: 700;">Yashash manzili</label>
+              <input type="text" id="appAddress" class="form-control" required placeholder="Tuman, mavze, ko'cha, xonadon">
+            </div>
+
+            <div style="margin-bottom: 14px;">
+              <label style="font-size: 12px; font-weight: 700;">Muammo va holat tavsifi</label>
+              <textarea id="appDesc" class="form-control" required placeholder="Oilaning moddiy ahvoli, tibbiy xulosa va ehtiyoj sabablari haqida to'liq yozing..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Arizani tekshiruvga topshirish</button>
+          </form>
+        </div>
+
+        <h4 style="margin-bottom: 10px; color: var(--dark-green);">📋 Mahalla tomonidan yuborilgan arizalar</h4>
+        <div class="table-container" id="mahallaAppsTableBox">
+          <p>Arizalar ro'yxati yuklanmoqda...</p>
+        </div>
+      `;
+      loadMahallaAppsList();
+    }
+
+    async function loadMahallaAppsList() {
+      const box = document.getElementById("mahallaAppsTableBox");
+      try {
+        const res = await fetch(`${API_BASE}/api/my/applications`, {
+          headers: { "Authorization": `Bearer ${currentToken}` }
+        });
+        const apps = await res.json();
+        if (!res.ok) throw new Error(apps.detail);
+
+        if (apps.length === 0) {
+          box.innerHTML = `<p style="padding: 15px; color: var(--text-muted);">Siz hali ariza yubormagansiz.</p>`;
+          return;
+        }
+
+        box.innerHTML = `
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Sarlavha</th>
+                <th>Fuqaro</th>
+                <th>Kerakli summa</th>
+                <th>Holat</th>
+                <th>Tasdiqlar</th>
+                <th>Yig'ildi</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${apps.map(a => {
+                let statusClass = "status-pending";
+                let statusText = "Kutilmoqda";
+                if (a.status === "approved") { statusClass = "status-approved"; statusText = "Tasdiqlandi"; }
+                if (a.status === "rejected") { statusClass = "status-rejected"; statusText = "Rad etildi"; }
+
+                return `
+                  <tr>
+                    <td>#${a.id}</td>
+                    <td><strong>${escapeHtml(a.title)}</strong></td>
+                    <td>${escapeHtml(a.citizen_name)}</td>
+                    <td>${formatMoney(a.target_amount)}</td>
+                    <td>
+                      <span class="status-badge ${statusClass}">${statusText}</span>
+                      ${a.rejection_reason ? `<div style="font-size: 11px; color: var(--danger); margin-top: 4px;">Sabab: ${escapeHtml(a.rejection_reason)}</div>` : ''}
+                    </td>
+                    <td><strong>${a.approval_count || 0}/2</strong> idora</td>
+                    <td style="color: var(--primary); font-weight: 700;">${formatMoney(a.collected_amount)}</td>
+                  </tr>
+                `;
+              }).join("")}
+            </tbody>
+          </table>
+        `;
+      } catch (e) {
+        box.innerHTML = `<p style="color: var(--danger);">Xatolik: ${escapeHtml(e.message)}</p>`;
+      }
+    }
+
+    async function submitMahallaApp(e) {
+      e.preventDefault();
+      try {
+        const res = await fetch(`${API_BASE}/api/applications`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${currentToken}`
+          },
+          body: JSON.stringify({
+            title: document.getElementById("appTitle").value.trim(),
+            citizen_name: document.getElementById("appCitizen").value.trim(),
+            citizen_pinfl: document.getElementById("appPinfl").value.trim(),
+            category: document.getElementById("appCategory").value,
+            target_amount: parseInt(document.getElementById("appTarget").value, 10),
+            address: document.getElementById("appAddress").value.trim(),
+            description: document.getElementById("appDesc").value.trim()
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail);
+
+        showToast("Ariza tekshiruv navbatiga muvaffaqiyatli topshirildi!");
+        loadMahallaAppsList();
+        document.getElementById("mahallaNewAppForm").reset();
+      } catch (err) {
+        showToast(err.message, true);
+      }
+    }
+
+    // Reviewer Dashboard
+    async function renderReviewerDashboard(container) {
+      container.innerHTML = `
+        <div style="background: var(--teal-light); padding: 14px 18px; border-radius: var(--radius); margin-bottom: 20px; font-size: 13px; color: var(--teal-accent);">
+          🔍 <strong>Idora tekshiruvi:</strong> Sizning tashkilotingiz <strong>${escapeHtml(currentUser.org)}</strong> nomidan arizalarning haqqoniyligini tekshirasiz. Kamida 2 ta mustaqil idora tasdiqlagan ariza ommaviy sahifaga chiqadi.
+        </div>
+
+        <h4 style="margin-bottom: 12px; color: var(--dark-green);">⏳ Ko'rib chiqish navbatidagi arizalar</h4>
+        <div id="reviewerQueueBox">
+          <p>Navbat yuklanmoqda...</p>
+        </div>
+      `;
+      loadReviewerQueue();
+    }
+
+    async function loadReviewerQueue() {
+      const box = document.getElementById("reviewerQueueBox");
+      try {
+        const res = await fetch(`${API_BASE}/api/review/queue`, {
+          headers: { "Authorization": `Bearer ${currentToken}` }
+        });
+        const queue = await res.json();
+        if (!res.ok) throw new Error(queue.detail);
+
+        if (queue.length === 0) {
+          box.innerHTML = `
+            <div style="padding: 40px; text-align: center; background: var(--bg-page); border-radius: var(--radius); border: 1px dashed var(--border-color);">
+              <p style="color: var(--text-muted); font-size: 14px;">🎉 Navbatda tekshirilmagan yangi arizalar yo'q. Barcha arizalar ko'rib chiqilgan!</p>
+            </div>
+          `;
+          return;
+        }
+
+        box.innerHTML = queue.map(a => `
+          <div style="background: #fff; border: 1.5px solid var(--border-color); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <span class="card-category">${escapeHtml(a.category)}</span>
+              <span class="status-badge status-pending">Hozirgi tasdiqlar: ${a.current_approvals}/2</span>
+            </div>
+            <h3 style="font-size: 18px; color: var(--dark-green); margin-bottom: 6px;">${escapeHtml(a.title)}</h3>
+            <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">
+              Fuqaro: <strong>${escapeHtml(a.citizen_name)}</strong> (JShShIR: ${escapeHtml(a.citizen_pinfl)}) | MFY: <strong>${escapeHtml(a.mahalla_org)}</strong>
+            </div>
+            <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px;">
+              Kerakli summa: <strong style="color: var(--primary); font-size: 15px;">${formatMoney(a.target_amount)}</strong> | Manzil: ${escapeHtml(a.address)}
+            </div>
+            <p style="font-size: 13px; line-height: 1.6; color: var(--text-main); background: #f9fbf9; padding: 12px; border-radius: 8px; border: 1px solid #eef3ef; margin-bottom: 14px;">
+              ${escapeHtml(a.description)}
+            </p>
+
+            <div style="border-top: 1px solid var(--border-color); padding-top: 14px;">
+              <label style="font-size: 12px; font-weight: 700; color: var(--dark-green); display: block; margin-bottom: 6px;">
+                Tashkilot xulosasi va dalillar (izoh):
+              </label>
+              <textarea id="reviewComment_${a.id}" class="form-control" style="min-height: 60px; margin-bottom: 12px;" placeholder="Tekshiruv natijasi, ma'lumotlar bazasi xulosasi yoki rad etish sababi..."></textarea>
+
+              <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button class="btn btn-danger" onclick="submitReviewAction(${a.id}, 'reject')">
+                  ✕ Rad etish
+                </button>
+                <button class="btn btn-primary" onclick="submitReviewAction(${a.id}, 'approve')">
+                  ✓ Tasdiqlash
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      } catch (e) {
+        box.innerHTML = `<p style="color: var(--danger);">Xatolik: ${escapeHtml(e.message)}</p>`;
+      }
+    }
+
+    async function submitReviewAction(appId, decision) {
+      const commentInput = document.getElementById(`reviewComment_${appId}`);
+      const comment = commentInput ? commentInput.value.trim() : "";
+
+      if (decision === "reject" && (!comment || comment.length < 5)) {
+        showToast("Rad etish uchun batafsil sabab kiritish shart (kamida 5 belgi)!", true);
+        return;
+      }
+      if (decision === "approve" && !comment) {
+        showToast("Tasdiqlash xulosasini kiriting!", true);
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/api/review/${appId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${currentToken}`
+          },
+          body: JSON.stringify({ decision, comment })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail);
+
+        showToast(data.message);
+        loadReviewerQueue();
+        loadStats();
+        loadApplications();
+      } catch (err) {
+        showToast(err.message, true);
+      }
+    }
+  </script>
+</body>
+</html>
